@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/parametros_pantalla.dart';
 
 
 class EjemploPantalla extends StatelessWidget {
+  // Pasos para obtener y modificar el texto en un TextField
+  // Paso 1: Crear instancia de TextEditingController
+  TextEditingController _controladorTexto =
+    new TextEditingController(text: "inicial");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +27,7 @@ class EjemploPantalla extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextField(
+                    controller: _controladorTexto, // Paso 2
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.account_circle),
                         labelText: "Nombre"
@@ -55,7 +61,16 @@ class EjemploPantalla extends StatelessWidget {
                   ),
                   RaisedButton(
                     child: Text("Guardar"),
-                    onPressed: (){},
+                    onPressed: () async {
+                      // Paso 3: llamar a TextEditingController
+                      String nombre = _controladorTexto.text;
+                      // Forma de recibir un resultado de la pantalla <ParametrosPantall>
+                      final result = await Navigator.push(context, MaterialPageRoute(
+                        builder: (BuildContext contextoLocal) => new ParametrosPantalla(nombre)
+                      ));
+                      print(result);
+                      _controladorTexto.text = result;
+                    },
                   )
                 ],
               ),

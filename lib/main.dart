@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/ejemplo_pantalla.dart';
+import 'package:flutter_app/estado_pantalla.dart';
+import 'package:flutter_app/componentes_stateful_pantalla.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -30,7 +32,23 @@ class PantallaPrincipal extends StatelessWidget {
                   builder: (contextoLocal) => EjemploPantalla()
                 ));
               },
-            )
+            ),
+            ListTile(
+              title: Text("Pantalla con estado"),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (contextoLocal) => EstadoPantalla()
+                ));
+              },
+            ),
+            ListTile(
+              title: Text("Ejemplos con estado"),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (contextoLocal) => ComponentesEjemploPantalla()
+                ));
+              },
+            ),
           ],
         ),
       ),
