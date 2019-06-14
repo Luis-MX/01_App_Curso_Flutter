@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/ejemplo_pantalla.dart';
 import 'package:flutter_app/estado_pantalla.dart';
+import 'package:flutter_app/cupertino_pantalla.dart';
 import 'package:flutter_app/componentes_stateful_pantalla.dart';
 
 void main() {
@@ -46,6 +47,14 @@ class PantallaPrincipal extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                     builder: (contextoLocal) => ComponentesEjemploPantalla()
+                ));
+              },
+            ),
+            ListTile(
+              title: Text("Ejemplos de Cupertino"),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (contextoLocal) => CupertinoPantalla()
                 ));
               },
             ),
