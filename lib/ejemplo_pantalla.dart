@@ -6,7 +6,7 @@ class EjemploPantalla extends StatelessWidget {
   // Pasos para obtener y modificar el texto en un TextField
   // Paso 1: Crear instancia de TextEditingController
   TextEditingController _controladorTexto =
-    new TextEditingController(text: "inicial");
+    new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
