@@ -32,6 +32,8 @@ class PantallaPrincipalState extends State<PantallaPrincipal> {
 
   @override
   Widget build(BuildContext context) {
+    List<Usuario> hombres = _listaUsuarios.where((usuario) => usuario.genero == "male");
+    List<Usuario> mujeres = _listaUsuarios.where((usuario) => usuario.genero == "female");
     return new Scaffold(
       appBar: AppBar(
         title: Text("Aplicacion Flutter"),
@@ -88,18 +90,35 @@ class PantallaPrincipalState extends State<PantallaPrincipal> {
           ],
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (BuildContext contextLocal, int indice) {
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(_listaUsuarios[indice].urlAvatar),
-            ),
-            title: Text(_listaUsuarios[indice].nombreCompleto),
-            subtitle: Text(_listaUsuarios[indice].correo),
-            onTap: () {},
-          );
-        },
-        itemCount: _listaUsuarios.length,
+      body: ListView(
+        children: <Widget>[
+          SizedBox(height: 30),
+          Text("Hombres:", style: TextStyle(fontSize: 25),),
+          ...hombres.map((usuario) {
+            return ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(usuario.urlAvatar),
+              ),
+              title: Text(usuario.nombreCompleto),
+              subtitle: Text(usuario.correo),
+              onTap: () {},
+            );
+          }
+          ).toList(),
+          SizedBox(height: 30),
+          Text("Mujeres:", style: TextStyle(fontSize: 25),),
+          ...mujeres.map((usuario) {
+            return ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(usuario.urlAvatar),
+              ),
+              title: Text(usuario.nombreCompleto),
+              subtitle: Text(usuario.correo),
+              onTap: () {},
+              );
+            }
+          ).toList(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.refresh),
@@ -110,7 +129,7 @@ class PantallaPrincipalState extends State<PantallaPrincipal> {
   }
 
   void obtenerUsuarios() async {
-    final response = await Cliente.get("https://randomuser.me/api?results=100");
+    final response = await Cliente.get("https://randomuser.me/api?results=15");
     if (response.statusCode == 200) {
       String strJson = response.body;
       Map<String, dynamic> json = jsonDecode(strJson);
